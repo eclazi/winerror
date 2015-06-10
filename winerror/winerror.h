@@ -20,23 +20,23 @@ namespace winerror
 {
     using error_t = uint32_t;
 
-    error_t getLastError()
+    inline error_t getLastError()
     {
         return GetLastError();
     }
 
-    error_t wsaGetLastError()
+    inline error_t wsaGetLastError()
     {
         return WSAGetLastError();
     }
 
-    std::string errorString(error_t errCode)
+    inline std::string errorString(error_t errCode)
     {
         _com_error err(errCode);
         return err.ErrorMessage();
     }
 
-    std::string getLastErrorString()
+    inline std::string getLastErrorString()
     {
         return errorString(getLastError());
     }
