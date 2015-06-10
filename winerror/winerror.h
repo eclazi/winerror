@@ -50,6 +50,7 @@ namespace winerror
             "Win32 Error : " + std::to_string(errCode) + " " + errorString(errCode)
             )
         {
+            std::cerr << what();
         }
 
         Win32Error(error_t errCode, const char* file, size_t line)
@@ -57,6 +58,7 @@ namespace winerror
             "Win32 Error : " + std::to_string(errCode) + " " + errorString(errCode) + " " + file + " " + std::to_string(line)
             )
         {
+            std::cerr << what();
         }
     };
 }
