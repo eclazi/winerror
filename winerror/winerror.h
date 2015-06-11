@@ -50,15 +50,24 @@ namespace winerror
             "Win32 Error : " + std::to_string(errCode) + " " + errorString(errCode)
             )
         {
-            std::cerr << what();
+            log(this);
         }
 
         Win32Error(error_t errCode, const char* file, size_t line)
             : std::runtime_error(
-            "Win32 Error : " + std::to_string(errCode) + " " + errorString(errCode) + " " + file + " " + std::to_string(line)
+            "Win32 Error : " + std::to_string(errCode) + " " + errorString(errCode) + " " + file + " line " + std::to_string(line)
             )
         {
-            std::cerr << what();
+            log(this);
+        }
+    
+        static void log(Win32Error* error)
+        {
+            assert(error);
+            std::string msg(error->what());
+            msg.append("\n");
+            std::cerr << msg;
+            OutputDebugString(msg.c_str());
         }
     };
 }
